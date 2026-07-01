@@ -1,4 +1,20 @@
-import streamlit as st
+import subprocess
+import sys
+
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+# 确保依赖已安装
+try:
+    import feedparser
+except ImportError:
+    install("feedparser")
+
+try:
+    from bs4 import BeautifulSoup
+except ImportError:
+    install("beautifulsoup4")
+    import streamlit as st
 import feedparser
 from bs4 import BeautifulSoup
 import datetime
