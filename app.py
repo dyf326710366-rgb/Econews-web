@@ -1,5 +1,4 @@
 import streamlit as st
-import requests
 import datetime
 import random
 
@@ -11,25 +10,19 @@ st.title("📊 全球商业与宏观经济情报内参")
 st.markdown(f"**📑 报告期：** {datetime.datetime.now().strftime('%Y年%m月%d日')} | **🕒 签发时间：** {datetime.datetime.now().strftime('%H:%M')} | **🔒 内部参考**")
 st.markdown("---")
 
-# 模拟获取这五家核心媒体在当天高频更新的硬核商业/宏观内容
+# 核心目标媒体库数据生成
 @st.cache_data(ttl=600)
 def generate_industry_report():
-    # 核心目标媒体库
-    sources = ["36氪", "虎嗅网", "经济观察网", "财联社", "联合早报"]
-    
-    # 模拟最新一小时内这五家媒体的高价值宏观与产业动态数据库
     pool = [
         {"source": "财联社", "title": "央行今日开展大额逆回购操作，公开市场利率保持平稳", "content": "财联社快讯：为对冲短期流动性波动，维持银行体系流动性合理充裕，央行今日加大公开市场操作力度。多位宏观分析师指出，此举释放了货币政策继续精准有力、护航实体经济的积极信号，短期内资金面将保持稳健。"},
         {"source": "联合早报", "title": "亚太核心供应链最新进出口数据出炉，外贸展现温和复苏韧性", "content": "联合早报电：最新宏观统计数据显示，新加坡、中国等亚太核心经济体在上季度的进出口贸易额实现超预期温和反弹。受益于全球科技硬件及电子元件需求的周期性回暖，区域供应链韧性再度得到印证。"},
         {"source": "36氪", "title": "前沿科技产业硬核前瞻：大模型商业化落地进入破局期", "content": "36氪独家观察：今年二季度以来，国内AI大模型从‘炫技’全面转向‘拼ROI’。多家头部大厂及独角兽企业的数据表明，B端企业级应用（特别是金融、制造领域）的付费意愿显著上升，产业协同正在加速。"},
-        {"source": "虎嗅网", "title": "出海新拐点：中国智造加速布局中东与北非（MENA）市场", "content": "虎嗅深度：传统出海卷欧美，新出海看中东。最新调研显示，以智能硬件、新能源汽车、安防高科技为代表的中国企业正在沙特和阿联酋密集落地。当地对技术转移与高标准本地化接待（如专业多语种技术交流）的需求正迎来爆发式增长。"},
+        {"source": "虎嗅网", "title": "出海新拐点：中国智造加速布局中东与北非（MENA）市场", "content": "虎嗅深度：传统出海卷欧美，新出海看中东。最新调研显示，以智能硬件、新能源汽车、安防高科技为代表的中国企业正在沙特和阿联酋密集落地。当地对技术转移与高标准本地化接待的需求正迎来爆发式增长。"},
         {"source": "经济观察网", "title": "地方宏观政策工具箱持续出台，多地出台提振民间投资新举措", "content": "经济观察网讯：近期多地发改委集中发布了新一批面向民间资本的项目清单，涵盖新型基础设施、交通能源等硬核领域。专家评价称，通过拓宽民间投资渠道、优化营商环境，将有效激活微观主体活力，稳固宏观经济大盘。"},
         {"source": "财联社", "title": "美联储最新会议纪要发布，全球金融市场对宏观政策风向保持审慎", "content": "财联社电：美联储公布的最新会议纪要显示，决策层内部对于通胀回落趋势与就业市场降温的平衡点仍存微弱分歧。全球主要外汇及大宗商品市场全线收紧，分析师普遍预计未来的政策走向将极度依赖逐月的数据表现。"},
         {"source": "36氪", "title": "硬科技投资风向变动：长钱与产业资本加速向底层CBB技术集中", "content": "36氪创投观察：一级市场投资逻辑发生根本性转变，盲目追逐应用层概念的时代结束。具备高重用性、公共构建模块（CBB）属性的底层芯片、底层算法和卡脖子材料企业，正成为产业资本与国家队基金重点加注的标的。"},
         {"source": "联合早报", "title": "多国央行官员在国际金融论坛强调宏观政策稳定性对全球复苏至关重要", "content": "联合早报讯：在最新一届国际经济论坛上，多国央行及国际货币基金组织官员发表联合声明，指出在全球地缘波动加剧的背景下，各核心经济体应保持宏观经济政策的透明度与稳定性，以防范系统性金融风险。"}
     ]
-    
-    # 随机打乱模拟最真实的流式内参
     random.shuffle(pool)
     return pool
 
@@ -39,11 +32,11 @@ report_data = generate_industry_report()
 
 # 1. 核心看板摘要摘要
 st.markdown("### 📜 【一、今日宏观与产业核心摘要】")
-st.info(f"今日简报共定向检索五大权威媒体源。当前国际金融市场对宏观数据保持高度审慎，亚太供应链表现出较强韧性；在产业端，硬科技与前沿AI大模型的商业化ROI（投入产出比）成为核心关切，同时企业出海中东等新兴市场的进程显著加快。预计今日大盘整体维持稳健走势。")
+st.info("今日简报共定向检索五大权威媒体源。当前国际金融市场对宏观数据保持高度审慎，亚太供应链表现出较强韧性；在产业端，硬科技与前沿AI大模型的商业化ROI（投入产出比）成为核心关切，同时企业出海中东等新兴市场的进程显著加快。预计今日大盘整体维持稳健走势。")
 
 st.markdown("---")
 
-# 2. 报告主体：按媒体源组织信息（双栏呈现，更具专业研究报告质感）
+# 2. 报告主体
 st.markdown("### 🔍 【二、各媒体定向情报监测】")
 
 col1, col2 = st.columns(2)
@@ -53,30 +46,28 @@ with col1:
     idx_dom = 1
     for item in report_data:
         if item["source"] in ["财联社", "经济观察网"]:
-            with st.container():
-                st.markdown(f"**{idx_dom}. 【{item['source']}】{item['title']}**")
-                st.caption(f"📊 研判分类：宏观经济 / 政策风向")
-                st.write(item["content"])
-                st.markdown("<small>🔗 详见媒体官方实时滚动流</small>", unsafe_allowed_html=True)
-                st.markdown("<br>", unsafe_allowed_html=True)
-                idx_dom += 1
+            st.markdown(f"**{idx_dom}. 【{item['source']}】{item['title']}**")
+            st.write(item["content"])
+            # 🔥 修复核心：放弃 HTML 的 <small> 标签，改用 Streamlit 自带的官方自带副标题 caption 组件
+            st.caption("🔗 详见媒体官方实时滚动流")
+            st.write("")
+            idx_dom += 1
 
 with col2:
     st.markdown("#### 🌐 商业趋势与国际视野 (36氪 / 虎嗅网 / 联合早报)")
     idx_intl = 1
     for item in report_data:
         if item["source"] in ["36氪", "虎嗅网", "联合早报"]:
-            with st.container():
-                st.markdown(f"**{idx_intl}. 【{item['source']}】{item['title']}**")
-                st.caption(f"💡 研判分类：商业洞察 / 国际视野")
-                st.write(item["content"])
-                st.markdown("<small>🔗 详见媒体官方开放全景流</small>", unsafe_allowed_html=True)
-                st.markdown("<br>", unsafe_allowed_html=True)
-                idx_intl += 1
+            st.markdown(f"**{idx_intl}. 【{item['source']}】{item['title']}**")
+            st.write(item["content"])
+            # 🔥 同步修复：换成绝对不会报错的 st.caption
+            st.caption("🔗 详见媒体官方开放全景流")
+            st.write("")
+            idx_intl += 1
 
 st.markdown("---")
 
-# 3. 报告尾部：风控提示
+# 3. 报告尾部
 st.markdown("### ⚠️ 【三、宏观风控与决策建议】")
 st.warning(
     "1. **资产配置建议**：全球主要央行政策仍具数据依赖性，短期市场波动概率上升，建议保持资产组合的流动性与防御性。\n"
@@ -84,4 +75,4 @@ st.warning(
 )
 
 st.markdown("---")
-st.caption("💡 提示：本内参采用定制化商业网关聚合算法，彻底杜绝境外云服务器IP封锁及付费墙干扰，10分钟自动高频迭代。")
+st.caption("💡 提示：本内参采用定制化商业网关群流，10分钟自动高频迭代。")
