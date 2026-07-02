@@ -15,9 +15,11 @@ st.markdown("---")
 
 # 1. 重新规划更稳定的 RSS 订阅源
 DOMESTIC_FEEDS = {
-    "新浪财经焦点": "http://rss.sina.com.cn/news/allnews/finance.xml",
-    "联合早报-中国财经": "https://www.zaobao.com/external/rss/finance/china" # 虽然是新加坡媒体，但全中文且紧跟国内宏观
+    "华尔街见闻-快讯": "https://wallstreetcn.com/rss/news",               # 国内极速宏观财经快讯
+    "财新网-经济": "https://www.caixin.com/rss/finance_macro.xml",     # 权威宏观经济媒体
+    "联合早报-中国财经": "https://www.zaobao.com/external/rss/finance/china" # 全中文，高频率更新中国经济动态
 }
+
 
 FOREIGN_FEEDS = {
     "路透社-宏观经济": "https://www.reutersagency.com/feed/?best-types=global-economy&post_type=best",
